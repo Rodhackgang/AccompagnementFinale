@@ -277,6 +277,7 @@ main {
     background-size: cover;
     background-position: center;
     transition: .3s ease;
+    overflow-x: hidden;
 }
 .container{
     display: flex;
