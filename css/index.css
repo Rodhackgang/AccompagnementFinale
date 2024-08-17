@@ -1,0 +1,718 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+*,
+::before,
+::after{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+    color: #fff;
+    background: #09001d;
+    overflow-x: hidden;
+}
+@font-face {
+    font-family:"Montserrat" ;
+    src: url('../assets/Fonts/Montserrat-Regular.ttf');
+}
+html{
+    scroll-behavior: smooth;
+}
+
+img{
+    width: 60px;
+}
+.logoTitle{
+    font-size: 8px;
+}
+.header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 50%;
+    padding: 15px 2%;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 28px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    filter: drop-shadow(0 0 5px #09001d)
+}
+
+
+nav{
+    position: fixed;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 15px 15px;
+    background: #fafafa;
+    box-shadow:inset 0px -1px 0px #c5c5c6 ;
+}
+
+.nav-icon{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.nav-icon span{
+    font-size: 25px;
+    margin-left: 10px;
+    font-weight: 400;
+    color:#333;
+}
+
+.nav-icon img{
+    width: 60px;
+    transform:translateX(5px);
+}
+
+.hamburger{
+    display: none;
+}
+
+.navlinks-container a{
+    margin: 0 10px ;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #414141;
+    display: inline-block;
+    position: relative;
+    z-index: 20000;
+}
+
+.navlinks-container a::after{
+    content: "" ;
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    width: 100%;
+    height: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: #333;
+    transition:transform 0.3s ease-out;
+}
+
+.navlinks-container a:hover::after{
+    transform: scaleX(1);
+}
+
+.nav-authentification{
+    margin-left: auto;
+}
+
+
+.sign-btns button{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    min-width: 90px;
+    padding: 10px 5px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.sign-btns button a{
+    text-decoration:none;
+}
+
+.sign-btns button:nth-child(2){
+
+    background: rgb(196, 0, 148);
+}
+
+.sign-user{ 
+    display: none;
+}
+
+#InscriptionButton{
+    color: white;
+}
+@media (max-width: 900px){
+    nav{
+        padding: 15px 20px ;
+        position: relative;
+    }
+
+    .nav-icon{
+        order: 2;
+        margin: 0 auto;
+    }
+
+    .nav-icon span{
+        font-size: 22px;
+    }
+
+    .main-navlinks{
+        order: 1
+    }
+
+    /* HAMBURGER */
+    .hamburger{
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        border: none;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    .hamburger span{
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: #333;
+        position: absolute;
+        pointer-events: none;
+        transition: opacity 0.3s 0.15s ease-out;
+    }
+
+    .hamburger span:nth-child(1),
+    .hamburger span:nth-child(3){
+        transition: transform 0.3s ease-out;
+    }
+
+
+    .hamburger span:nth-child(1){
+        transform: translateY(7px);
+    }
+    .hamburger span:nth-child(3){
+        transform: translateY(-7px);
+    }
+
+    .hamburger.open span:nth-child(1){
+        transform: translate(0) rotate(135deg);
+    }
+    .hamburger.open span:nth-child(2){
+        opacity: 0;
+        transition: opacity Os ease-out;
+    }
+    .hamburger.open span:nth-child(3){
+        transform: translate(0) rotate(-135deg);
+    }
+
+    .navlinks-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: fixed; /* Utilisation de fixed pour rester visible sur la page */
+        background-color: #ffffff;
+        color: #09001d;
+        z-index: 1000;
+        top: 0; /* Pour qu'il soit en haut */
+        left: 0;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        height: 100vh;
+        width: 250px; /* Ajustez la largeur selon vos besoins */
+        border-right: 1px solid #c5c5c6;
+        padding: 20px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        opacity: 1; 
+    }
+    .open{
+        transform: translate(0%);
+    }
+
+    .close{
+        transform: translate(-100%);
+    }
+    .Navlink {
+        color: #09001d;
+        text-decoration: none;
+        font-size: 18px;
+        margin: 15px 0;
+        padding: 10px;
+        border-radius: 5px; /* Coins arrondis pour un look plus doux */
+        transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+    
+    /* Effets au survol et au focus des liens */
+    .Navlink:hover,
+    .Navlink:focus {
+        background-color: #f0f0f0; /* Couleur de fond au survol */
+        color: #0056b3; /* Couleur du texte au survol */
+        transform: translateX(10px); /* Déplacement léger vers la droite */
+    }
+    .navlinks-container a{
+        font-size: 18px;
+        margin: 20px 0;
+    }
+    .nav-authentification{
+        order: 3;
+        margin-left: 0;
+    }
+
+    .sign-user{
+        display: block;
+        border: none;
+    }
+
+    .sign-user img{
+        width: 30px;
+    }
+    .sign-btns{
+        display: none;
+    }
+}
+
+main {
+    min-height: 120vh;
+    background: url("../assets/background.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+    transition: .3s ease;
+}
+.container{
+    display: flex;
+    height: 100vh;
+    width: 200%;
+}
+main.active{
+    filter: blur(15px);
+    pointer-events: none;
+}
+.home{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: -50%;
+}
+.home-content{
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px;
+}
+.home-content h1{
+    font-size: 70px;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0, 0, 0, .3);
+}
+.home-content p{
+    font-size: 16px;
+    align-items: center;
+    text-shadow: 0 0 10px rgba(0, 0, 0, .3);
+    margin-bottom: 30px;
+}
+.home-content .start-btn{
+    width: 190px;
+    height: 55px;
+    background: #c40094;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    box-shadow: 0 0 10px #c40094;
+    font-size: 18px;
+    color: #fff;
+    letter-spacing: 1px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .5s;
+}
+.home-content .start-btn:hover{
+    background: #09001d;
+    box-shadow: none;
+}
+.home-content button a {
+    text-decoration: none;
+    color: #fff;
+}
+.popup-info{
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(.9);
+    width: 300px;
+    background: #fff;
+    border-radius: 6px;
+    padding: 10px 25px;
+    opacity: 0;
+    pointer-events: none;
+    transition: .3s ease;
+}
+.popup-info.active{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+.start-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.start-btn:hover {
+    background-color: #0056b3;
+}
+
+
+.popup-info h2{
+    font-size: 50px;
+    color: #c40094;
+}
+.popup-info .info{
+    display: inline-block;
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+    margin: 4px 0;
+}
+.popup-info .btn-group{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #999;
+    margin-top: 10px;
+    padding: 15px 0 7px;
+}
+.popup-info .btn-group .info-btn{
+    width: 135px;
+    height: 45px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: #c40094;
+    border: 2px solid #c40094;
+    outline: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    transition: .5s;
+}
+.popup-info .btn-group .info-btn:nth-child(1){
+    background: transparent;
+    color: #c40094;
+}
+.popup-info .btn-group .info-btn:nth-child(2):hover{
+    background: #950170;
+    border-color: #950170;
+}
+.popup-info .btn-group .info-btn:nth-child(1):hover{
+    background: #c40094;
+    color: #fff;
+}
+.cards-section {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+
+.card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.play-btn {
+    background-color: #c40094;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.play-btn:hover {
+    background-color: #09001d;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+.quiz-section{
+    width: 100%;
+    height: 150vh;
+    background: #09001d;
+    position: relative;
+    left: -50%;
+    
+    transition: .8s ease-in-out;
+    transition-delay: .25s;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.quiz-section.active{
+    left:0;
+}
+.quiz-section .quiz-box{
+    position: relative;
+    max-width: 650px;
+    background: transparent;
+    border: 2px solid #c40094;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+    
+}
+.quiz-box h1{
+    font-size: 32px;
+    text-align: center;
+    background: linear-gradient(45deg, transparent, #c40094, transparent);
+    border-radius: 6px;
+}
+.quiz-box .quiz-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 2px solid #c40094;
+    margin-bottom: 25px;
+}
+.quiz-header .span{
+    font-size: 18px;
+    font-weight: 500;
+}
+.quiz-header .header-score {
+    background: #c40094;
+    border-radius: 3px;
+    padding: 7px;
+}
+.quiz-box .question-text{
+    font-size: 24px;
+    font-weight: 600;
+}
+.option-list .option{
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    font-size: 17px;
+    border-radius: 4px;
+    margin: 15px 0;
+    cursor: pointer;
+    transition: .3s;
+}
+.option-list .option:hover{
+    background: rgba(255, 255, 255, .1);
+    border-color: 2px solid rgba(255, 255, 255, .1);
+}
+.quiz-box .quiz-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid #c40094;
+    margin-top: 30px;
+    padding-top: 20px;
+}
+.quiz-footer .question-total{
+    font-size: 16px;
+    font-weight: 600;
+}
+.quiz-footer .next-btn{
+    width: 100px;
+    height: 45px;
+    background: rgba(255, 255, 255, .1);
+    border: 2px solid rgba(255, 255, 255, .1);
+    outline: 6px;
+    border-radius: 6px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, .3);
+    font-weight: 600;
+    cursor: pointer;
+    transition: .5s;
+}
+.validate-btn{
+    width: 100px;
+    height: 45px;
+    background: #950170;
+    border: 2px solid rgba(255, 255, 255, .1);
+    outline: 6px;
+    border-radius: 6px;
+    font-size: 16px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .5s;
+}
+.left-game{
+    background:#c40094;
+    border: 2px solid rgba(255, 255, 255, .1);
+    outline: 6px;
+    border-radius: 6px;
+    font-size: 16px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+.left-game:hover, .validate-btn:hover{
+    background: #950170;
+}
+.quiz-footer .next-btn:hover{
+    background: #950170;
+    border-color: #950170;
+    color: #fff;
+}
+
+
+.option.selected {
+    border: 2px solid #c40094;
+    background: rgba(255, 255, 255, .1);
+}
+
+.option.correct {
+    background-color: #4caf50;
+    color: white;
+}
+
+.option.incorrect {
+    background-color: #f44336;
+    color: white;
+}
+
+.contact-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-content label {
+    font-size: 18px;
+}
+
+.contact-content input, textarea {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #c40094;
+    border-radius: 5px;
+    background: #09001d;
+    color: #fff;
+}
+
+.contact-content .submit-btn {
+    padding: 10px;
+    font-size: 18px;
+    color: #fff;
+    background: #c40094;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition:  0.3s;
+    margin-bottom: 90px;
+}
+
+.contact-content .submit-btn:hover {
+    background: #950170;
+}
+.about-content h1, .contact-content h1{
+    text-align: center;
+}
+.about-content p{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+.footer {
+    padding: 20px 5%;
+    background: #1e1e1e;
+    color: #fff;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+}
+.coding {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.neigecoding {
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 2%;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .navbar a {
+        font-size: 14px;
+    }
+
+    .menu-toggle {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 15px 1%;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .navbar a {
+        font-size: 12px;
+    }
+
+    .menu-toggle {
+        font-size: 20px;
+    }
+}

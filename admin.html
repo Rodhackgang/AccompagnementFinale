@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Manager</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Quiz Manager</h1>
+
+        <div class="category-form">
+            <h2>Create Category</h2>
+            <input type="text" id="categoryTitle" placeholder="Category Title">
+            <textarea id="categoryDescription" placeholder="Category Description"></textarea>
+            <button id="createCategoryBtn">Create Category</button>
+        </div>
+
+        <div class="quiz-form">
+            <h2>Add Quiz to Category</h2>
+            <select id="categorySelect">
+                <option value="">Select Category</option>
+            </select>
+            <input type="text" id="questionText" placeholder="Question Text">
+            <div id="optionsContainer">
+                <div class="option">
+                    <input type="text" class="optionText" placeholder="Option 1">
+                    <input type="checkbox" class="isCorrect"> Correct
+                </div>
+                <div class="option">
+                    <input type="text" class="optionText" placeholder="Option 2">
+                    <input type="checkbox" class="isCorrect"> Correct
+                </div>
+                <div class="option">
+                    <input type="text" class="optionText" placeholder="Option 3">
+                    <input type="checkbox" class="isCorrect"> Correct
+                </div>
+                <div class="option">
+                    <input type="text" class="optionText" placeholder="Option 4">
+                    <input type="checkbox" class="isCorrect"> Correct
+                </div>
+            </div>
+            <button id="addQuizBtn">Add Quiz</button>
+        </div>
+
+    </div>
+</body>
+</html>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+input, textarea, select {
+   
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.option input[type="text"] {
+    flex: 1;
+}
+
+.isCorrect {
+    margin-left: 10px;
+}
+
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const createCategoryBtn = document.getElementById('createCategoryBtn');
+    const addQuizBtn = document.getElementById('addQuizBtn');
+    const categorySelect = document.getElementById('categorySelect');
+
+    // Charger les catégories existantes au démarrage
+    fetchCategories();
+
+    // Fonction pour créer une nouvelle catégorie
+    createCategoryBtn.addEventListener('click', () => {
+        const title = document.getElementById('categoryTitle').value;
+        const description = document.getElementById('categoryDescription').value;
+
+        fetch('https://bougmabook-production-36c9.up.railway.app/api/categories', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title, description })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Category created successfully!');
+            fetchCategories(); // Recharger les catégories
+            document.getElementById('categoryTitle').value = '';
+            document.getElementById('categoryDescription').value = '';
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+    // Fonction pour ajouter un quiz à une catégorie
+    addQuizBtn.addEventListener('click', () => {
+        const categoryId = categorySelect.value;
+        const text = document.getElementById('questionText').value;
+        const options = Array.from(document.querySelectorAll('.option')).map(option => {
+            return {
+                text: option.querySelector('.optionText').value,
+                isCorrect: option.querySelector('.isCorrect').checked
+            };
+        });
+
+        fetch('https://bougmabook-production-36c9.up.railway.app/api/categories', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text, options, categoryId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Quiz added successfully!');
+            document.getElementById('questionText').value = '';
+            document.querySelectorAll('.optionText').forEach(input => input.value = '');
+            document.querySelectorAll('.isCorrect').forEach(checkbox => checkbox.checked = false);
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+    // Fonction pour charger les catégories et les afficher dans le sélecteur
+    function fetchCategories() {
+        fetch('https://bougmabook-production-36c9.up.railway.app/api/categories')
+        .then(response => response.json())
+        .then(categories => {
+            categorySelect.innerHTML = '<option value="">Select Category</option>';
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category._id;
+                option.textContent = category.title;
+                categorySelect.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+});
+
+</script>

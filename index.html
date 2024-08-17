@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Un site pour vous aidez dans la preparation des concours directs au Burkina Faso">
+    <meta name="keywords" content="concours, directs, accompagnement, finale,2024">
+    <meta name="author" content="ACCOMPAGNEMENT FINALE">
+    <meta property="og:title" content="Accompagnement Finale">
+    <meta property="og:description" content="Un site pour vous aidez dans la preparation des concours directs au Burkina Faso">
+    <meta property="og:image" content="../assets/Fonts/Icon.png>
+    <meta property="og:url" content="https://www.burkinaconcour.com">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="./assets/Icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./javascript/index.js" defer></script>
+    <link rel="preload" href="./assets/Icon.png" as="image">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    
+    <title>Accompagnements Finales</title>
+</head>
+
+
+<body>
+    <main class="main">
+        <header>
+            <nav>
+                <a href="" class="nav-icon" aria-label="visit homepage" aria-curent="page">
+                    <img src="./assets/Icon.png" alt="logo du site">
+                    <span class="logoTitle">Accompagnement Finale</span>
+                </a>
+                <div class="main-navlinks">
+                    <button class="hamburger" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                
+                    <div class="navlinks-container">
+                        <a href="#home" aria-current="page" class="Navlink">Accueil</a>
+                        <a href="#propos" class="Navlink">A propos</a>
+                        <a href="./pages/courses.html" class="Navlink">Formations</a>
+                        <a href="#contact" class="Navlink">Contact</a>
+                    </div>
+                </div>
+            
+                <div class="nav-authentification">
+                    <a href="./Connexion.html" class="sign-user" aria-label="sign-in page">
+                        <img src="./assets/user.png" alt="user-icon">
+                    </a>
+                    <div class="sign-btns">
+                        <button type="button">
+                            <a href="./Connexion.html" title="Connectez-vous ">Connexion</a>
+                        </button>
+                        <button type="button" >
+                            <a href="./Inscription.html" id="InscriptionButton">Inscription</a>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <section class="quiz-section">
+                <div class="quiz-box">
+                    <h1 id="quiz-title">Jour 1</h1>
+                    <div class="quiz-header">
+                        <span id="quiz-category">Accompagnement Jour 1</span>
+                        <span class="header-score" id="quiz-score">Score: 0/5</span>
+                    </div>
+                    <h2 class="question-text" id="question-text">
+                        Quel est la capitale du Burkina Faso?
+                    </h2>
+                    <div class="option-list" id="option-list"></div>
+                    <div class="quiz-footer">
+                        <span class="question-total" id="question-total">1 sur 5 Questions</span>
+                        <button class="validate-btn" id="validate-btn">Valider</button>
+                        <button class="next-btn" id="next-btn" disabled>Suivant</button>
+                    </div>
+                    
+                    <button class="left-game">Quitter le jeu</button>
+                </div>
+            </section>
+            <section class="home">
+                <div class="home-content">
+                    <h1>Concours 2024</h1>
+                    <p>Ceci est une application conçue pour vous accompagner tout au long des concours directs. Vous y
+                        trouverez un recueil de questions, leurs corrections, et la possibilité de jouer à des quiz.
+                        L'accès complet au contenu de l'application est disponible pour 1000 FCFA après votre paiement
+                        Numero de paiement: 67 34 04 85 <br>
+                        Nom qui va s'afficher lors du paiement: SIDIKI Aboubacar <br>
+                    </p>
+                    <button class="start-btn"><a href="#cardsSection">Démarrer</a></button>
+                </div>
+            </section>
+        </div>
+        <section class="cards-section" id="cardsSection"></section>
+        <section class="about-section">
+            <div class="about-content" id="propos">
+                <h1>À Propos</h1>
+                <p>
+                    Cette application regroupe les sujets retenus lors des compositions au concours directs. Vous y
+                    trouverez un récapitulatif des questions, ainsi que la possibilité de jouer à des quiz
+                    interactifs pour vous aider à préparer vos examens de manière ludique et efficace.
+                </p>
+            </div>
+            <div class="contact-content" id="contact">
+                <h1>Nous Contacter</h1>
+                <form id="contact-form" action="https://codingform-1-t7076501.deta.app/1965073915" method="post">
+                    <label for="name">Nom:</label>
+                    <input type="text" id="name" name="Name" placeholder="Entrez votre nom" required>
+    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="Email" placeholder="Entrez votre email" required>
+    
+                    <label for="phone">Numéro de téléphone:</label>
+                    <input type="tel" id="phone" name="Phone" placeholder="Entrez votre numero de telephone" required>
+                    <label for="message">« Si vous désirez vous abonner, écrivez "intéressé". »</label>
+                    <textarea name="Message" placeholder="Entrer un message"></textarea>
+                    <button type="submit" class="submit-btn">Valider</button>
+                </form>
+            </div>
+        </section>
+        <footer class="footer">
+            <p>&copy; 2024 Accompagnement Finale. Tous droits réservés.</p>
+        </footer>
+    </main>
+
+    <div class="popup-info">
+        <h2>Guide sur Quizz</h2>
+        <span class="info">1. Cochez la ou les bonnes réponses et Valider</span> <br>
+        <span class="info">2. Les bonnes réponses seront colorés en Verts</span> <br>
+        <span class="info">3. Les Mauvaises réponses seront colorés en Rouges</span> <br>
+        <span class="info">4. Le Score final est affiché à la fin du Quizz </span> <br>
+        <span class="info">5. Si vous rencontrez des difficultés contactez nous</span>
+        <div class="btn-group">
+            <button class="info-btn exit-btn">Quitter</button>
+            <button class="info-btn continue-btn">Continuer</button>
+        </div>
+
+    </div>
+    <div class='neigecoding'>
+        <canvas class='coding' id='coding'></canvas>
+   </div>
+</body>
+
+</html>

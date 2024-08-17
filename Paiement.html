@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de paiement</title>
+</head>
+
+<body>
+    <style>
+        @font-face {
+            font-family: Montserrat;
+            src: url('../assets/Fonts/Montserrat-Regular.ttf');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+
+        body {
+            font-family: Montserrat, 'Poppins', sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 960px;
+            /* height: 100vh; */
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .payment-method {
+            display: block;
+            width: 100%;
+            height: 50px;
+            border-radius: 7px;
+            margin-bottom: 15px;
+            color: white;
+            font-size: 18px;
+            line-height: 50px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .orange-money {
+            background-color: orange;
+        }
+
+        .moov-money {
+            background-color: #007bff;
+        }
+
+        .payment-method:hover {
+            transform: translateY(-2px);
+        }
+
+        form {
+            width: 100%;
+        }
+
+        #paiement {
+            width: 100%;
+            height: 25px;
+            border: 1px solid #141313;
+            border-radius: 7px;
+            padding: 10px;
+            font-family: Montserrat, 'Poppins', sans-serif;
+            font-weight: 100;
+            margin-bottom: 20px;
+            padding: 25px;
+            font-size: 16px;
+            transition: border 0.3s ease;
+        }
+
+        #paiement:focus {
+            border: 1px solid orange;
+        }
+
+        span {
+            font-weight: bold;
+            color: #334acf;
+        }
+
+        #button {
+            width: 100%;
+            height: 45px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #button:hover {
+            background-color: #0056b3;
+        }
+
+        #numero {
+            display: none;
+            color: red;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 380px) {
+            span {
+                font-weight: bold;
+                color: #cf6433;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .payment-method {
+                font-size: 14px;
+            }
+        }
+
+        @media (min-width: 600px) {
+            span {
+                font-weight: bold;
+                color: #cf6433;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .payment-method {
+                font-size: 14px;
+            }
+
+            .paid,
+            form {
+                display: flex;
+                flex-direction: row;
+                gap: 15px
+            }
+
+            #button {
+                height: 50px;
+            }
+        }
+    </style>
+
+    <div class="container">
+        <h1>Abonnement accompagnement concours 2024</h1>
+        <p>L'abonnement sur notre plateforme coûte <span>500 FCFA.</span></p>
+        <p>Choisissez votre opérateur et effectuez votre paiement. Après votre paiement, un email vous sera envoyé pour
+            vous avertir de l'activation de votre compte V.I.P.</p>
+        <div class="paid">
+            <div class="payment-method orange-money" onclick="window.location.href='tel:*144*2*1*67340485*500%23'">
+                Payer par Orange Money
+            </div>
+
+            <div class="payment-method moov-money" onclick="window.location.href='tel:*555*2*1*51242402*500%23'">
+                Payer par Moov Money
+            </div>
+        </div>
+
+
+        <p id="cor">Une fois votre paiement effectué, renseignez le numéro qui a servi à faire le dépôt. Si cela est
+            correct, vous aurez directement accès à la partie V.I.P.</p>
+
+        <form id="pos" method="post">
+            <input type="tel" name="" id="paiement" placeholder="Saisir votre numéro" required>
+            <button id="button">Valider</button>
+        </form>
+        <p id="numero">Le numéro de téléphone est invalide</p>
+    </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var storedToken = localStorage.getItem("token");
+        console.log(storedToken);
+
+        $('#button').click(function(event) {
+            event.preventDefault();
+
+            var paiement = $('#paiement').val();
+
+            if (paiement === '' || paiement.length < 8) {
+                $('#numero').show().text('Veuillez entrer un numéro valide');
+                return;
+            }
+
+            var formData = {
+                numero: paiement,
+            };
+
+            $.ajax({
+                url: 'https://burbaapi-production.up.railway.app/api/demandeVip',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                headers: {
+                    'Authorization': 'Bearer ' + storedToken
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert("Demande envoyée avec succès. La vérification prend 12 heures maximum.");
+                        window.location.href = './index.html';
+                    } else {
+                        $('#numero').show().text(response.message || "Erreur lors de la vérification.");
+                    }
+                },
+                error: function(error) {
+                    console.log('Erreur lors de la requête :', error);
+                    alert("Erreur lors de la requête, merci de réessayer.");
+                }
+            });
+        });
+    });
+</script>
